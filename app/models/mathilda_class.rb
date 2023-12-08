@@ -1,0 +1,2 @@
+class MathildaClass < ApplicationRecord
+end

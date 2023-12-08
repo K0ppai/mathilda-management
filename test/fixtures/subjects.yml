@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  mathilda_class: one
+
+two:
+  name: MyString
+  mathilda_class: two
