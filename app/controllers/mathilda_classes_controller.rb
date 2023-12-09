@@ -1,5 +1,5 @@
 class MathildaClassesController < ApplicationController
-  before_action :set_mathilda_class, only: %i[ show update destroy ]
+  before_action :set_mathilda_class, only: %i[show update destroy]
 
   # GET /mathilda_classes
   def index
@@ -39,13 +39,14 @@ class MathildaClassesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_mathilda_class
-      @mathilda_class = MathildaClass.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def mathilda_class_params
-      params.require(:mathilda_class).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_mathilda_class
+    @mathilda_class = MathildaClass.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def mathilda_class_params
+    params.require(:mathilda_class).permit(:name)
+  end
 end

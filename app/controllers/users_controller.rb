@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+  before_action :set_user, only: %i[show update destroy]
 
   # GET /users
   def index
@@ -15,12 +15,10 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
+    @user = User.new(email: params[:user][:email], password_digest: params[:user][:password])
 
     if @user.save
       # Check the role parameter and create associated record
-      create_role_record(params[:user][:role])
-
       render json: @user, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -43,15 +41,6 @@ class UsersController < ApplicationController
 
   private
 
-  def create_role_record(role)
-    case role
-    when "student"
-      Student.create(user: @user, name: params[:user][:name], age: params[:user][:age], is_external: params[:user][:is_external])
-    when "teacher"
-      Teacher.create(user: @user, name: params[:user][:name], age: params[:user][:age])
-    end
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
@@ -59,6 +48,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:email, :password_digest, :name, :age, :is_external, :role)
+    params.require(:user).permit(:email, :password, :name, :age, :is_external, :role, :mathilda_class_id)
   end
 end
