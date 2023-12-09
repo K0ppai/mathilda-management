@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show update destroy]
+  before_action :set_mathilda_class, only: %i[create]
 
   # GET /students
   def index
@@ -18,8 +19,7 @@ class StudentsController < ApplicationController
     user = User.new(user_params)
     if user.save
       student = Student.new(student_params)
-      mathilda_class = MathildaClass.find(params[:student][:mathilda_class_id])
-      student.mathilda_class = mathilda_class
+      student.mathilda_class = @mathilda_class
       student.user = user
 
       if student.save
@@ -35,8 +35,7 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1
   def update
-    mathilda_class = MathildaClass.find(params[:student][:mathilda_class_id])
-    @student.mathilda_class = mathilda_class
+    @student.mathilda_class = @mathilda_class
     if @student.update(student_params)
       render json: @student
     else
@@ -58,6 +57,10 @@ class StudentsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password_digest, :role)
+  end
+
+  def set_mathilda_class
+    @mathilda_class = MathildaClass.find(params[:student][:mathilda_class_id])
   end
 
   # Only allow a list of trusted parameters through.
