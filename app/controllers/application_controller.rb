@@ -6,28 +6,28 @@ class ApplicationController < ActionController::API
   end
 
   def decoded_token
-    header = request.headers["Authorization"]
-    if header
-      token = header.split(" ")[1]
-      begin
-        JWT.decode(token, 'lajsdfi102909h901h2f', true, algorithm: "HS256")
-      rescue JWT::DecodeError
-        nil
-      end
+    header = request.headers['Authorization']
+    return unless header
+
+    token = header.split[1]
+    begin
+      JWT.decode(token, 'lajsdfi102909h901h2f', true, algorithm: 'HS256')
+    rescue JWT::DecodeError
+      nil
     end
   end
 
   def current_user
-    if decoded_token
-      puts "token: #{decoded_token}"
-      user_id = decoded_token[0]["user_id"]
-      @user = User.find_by(id: user_id)
-    end
+    return unless decoded_token
+
+    puts "token: #{decoded_token}"
+    user_id = decoded_token[0]['user_id']
+    @user = User.find_by(id: user_id)
   end
 
   def authorized
-    unless !!current_user
-      render json: { message: "Please log in" }, status: :unauthorized
-    end
+    return unless current_user.nil?
+
+    render json: { message: 'Please log in' }, status: :unauthorized
   end
 end

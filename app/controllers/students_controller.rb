@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
       student.user = user
 
       if student.save
-        render json: {student: , token: @token}, status: :created, location: student
+        render json: { student:, token: @token }, status: :created, location: student
       else
         user.destroy
         render json: student.errors, status: :unprocessable_entity

@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  resources :subjects
-  resources :mathilda_classes
-  resources :teachers
-  resources :students
-  resources :users
-  post '/signup', to: 'users#create'
+  resources :subjects, only: %i[create update]
+  resources :mathilda_classes, only: %i[index]
+  resources :teachers, only: %i[create update]
+  resources :students, only: %i[create update]
   post '/login', to: 'auth#login'
 end

@@ -7,11 +7,11 @@ class AuthController < ApplicationController
     if @user.authenticate(login_params[:password])
       @token = encode_token(user_id: @user.id)
       render json: {
-               user: UserSerializer.new(@user),
-               token: @token,
-             }, status: :accepted
+        user: UserSerializer.new(@user),
+        token: @token
+      }, status: :accepted
     else
-      render json: { message: "Incorrect email or password" }, status: :unauthorized
+      render json: { message: 'Incorrect email or password' }, status: :unauthorized
     end
   end
 
@@ -21,7 +21,7 @@ class AuthController < ApplicationController
     params.require(:user).permit(:email, :password)
   end
 
-  def handle_record_not_found(e)
-    render json: { message: "Incorrect email or password" }, status: :unauthorized
+  def handle_record_not_found(_e)
+    render json: { message: 'Incorrect email or password' }, status: :unauthorized
   end
 end
