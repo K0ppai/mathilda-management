@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show update destroy]
   before_action :set_mathilda_class, only: %i[create]
+  skip_before_action :authorized, only: [:create]
 
   # GET /students
   def index
@@ -18,12 +19,13 @@ class StudentsController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
+      @token = encode_token(user_id: user.id)
       student = Student.new(student_params)
       student.mathilda_class = @mathilda_class
       student.user = user
 
       if student.save
-        render json: student, status: :created, location: student
+        render json: {student: , token: @token}, status: :created, location: student
       else
         user.destroy
         render json: student.errors, status: :unprocessable_entity
@@ -56,7 +58,7 @@ class StudentsController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password_digest, :role)
+    params.require(:user).permit(:email, :password, :role)
   end
 
   def set_mathilda_class

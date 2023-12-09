@@ -3,9 +3,28 @@ class MathildaClassesController < ApplicationController
 
   # GET /mathilda_classes
   def index
-    @mathilda_classes = MathildaClass.all
+    @mathilda_classes = MathildaClass.all.includes(:subjects, :students, subjects: [:teachers])
 
-    render json: @mathilda_classes
+    response_data = {
+      classes: @mathilda_classes.as_json(
+        include: {
+          students: {
+            only: %i[id name age is_external]
+          },
+          subjects: {
+            include: {
+              teachers: {
+                only: %i[id name age]
+              }
+            },
+            only: %i[id name]
+          }
+        },
+        only: %i[name id]
+      )
+    }
+
+    render json: response_data
   end
 
   # GET /mathilda_classes/1
