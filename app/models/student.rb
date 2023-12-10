@@ -2,6 +2,12 @@ class Student < ApplicationRecord
   belongs_to :user
   belongs_to :mathilda_class
 
+  validates :name, presence: true
+  validates :age, presence: true
+  validates :is_external, presence: true
+  validates :user_id, presence: true
+  validates :mathilda_class_id, presence: true
+
   def update_external_students
     response = RestClient.get 'http://localhost:3001/students'
     students = JSON.parse response
