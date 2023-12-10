@@ -1,0 +1,11 @@
+{
+  "students":[
+    {
+      "name": "watashi",
+      "mathilda_class_id": 4,
+      "is_external": true,
+      "id": 6,
+      "age": 22
+    }
+  ]
+}

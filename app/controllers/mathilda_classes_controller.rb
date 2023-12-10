@@ -1,11 +1,30 @@
 class MathildaClassesController < ApplicationController
-  before_action :set_mathilda_class, only: %i[ show update destroy ]
+  before_action :set_mathilda_class, only: %i[show update destroy]
 
   # GET /mathilda_classes
   def index
-    @mathilda_classes = MathildaClass.all
+    @mathilda_classes = MathildaClass.all.includes(:subjects, :students, subjects: [:teachers])
 
-    render json: @mathilda_classes
+    response_data = {
+      classes: @mathilda_classes.as_json(
+        include: {
+          students: {
+            only: %i[id name age is_external]
+          },
+          subjects: {
+            include: {
+              teachers: {
+                only: %i[id name age]
+              }
+            },
+            only: %i[id name]
+          }
+        },
+        only: %i[name id]
+      )
+    }
+
+    render json: response_data
   end
 
   # GET /mathilda_classes/1
@@ -39,13 +58,14 @@ class MathildaClassesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_mathilda_class
-      @mathilda_class = MathildaClass.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def mathilda_class_params
-      params.require(:mathilda_class).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_mathilda_class
+    @mathilda_class = MathildaClass.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def mathilda_class_params
+    params.require(:mathilda_class).permit(:name)
+  end
 end

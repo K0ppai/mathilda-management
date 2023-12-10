@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: %i[ show update destroy ]
+  before_action :set_teacher, only: %i[show update destroy]
 
   # GET /teachers
   def index
@@ -15,12 +15,18 @@ class TeachersController < ApplicationController
 
   # POST /teachers
   def create
-    @teacher = Teacher.new(teacher_params)
-
-    if @teacher.save
-      render json: @teacher, status: :created, location: @teacher
+    user = User.new(user_params)
+    if user.save
+      @teacher = Teacher.new(teacher_params)
+      @teacher.user = user
+      if @teacher.save
+        render json: @teacher, status: :created, location: @teacher
+      else
+        user.destroy
+        render json: @teacher.errors, status: :unprocessable_entity
+      end
     else
-      render json: @teacher.errors, status: :unprocessable_entity
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
@@ -39,13 +45,18 @@ class TeachersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_teacher
-      @teacher = Teacher.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def teacher_params
-      params.require(:teacher).permit(:name, :age, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_teacher
+    @teacher = Teacher.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:email, :password_digest, :role)
+  end
+
+  def teacher_params
+    params.require(:teacher).permit(:name, :age)
+  end
 end
