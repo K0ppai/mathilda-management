@@ -5,7 +5,7 @@ class TeachersController < ApplicationController
   def index
     @teachers = Teacher.all
 
-    render json: @teachers
+    render json: @teachers.as_json(only: %i[id name age])
   end
 
   # GET /teachers/1
@@ -17,13 +17,15 @@ class TeachersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      @teacher = Teacher.new(teacher_params)
-      @teacher.user = user
-      if @teacher.save
-        render json: @teacher, status: :created, location: @teacher
+      token = encode_token(user_id: user.id)
+      teacher = Teacher.new(teacher_params)
+      teacher.user = user
+
+      if teacher.save
+        render json: { teacher:, token: }, status: :created, location: teacher
       else
         user.destroy
-        render json: @teacher.errors, status: :unprocessable_entity
+        render json: teacher.errors, status: :unprocessable_entity
       end
     else
       render json: user.errors, status: :unprocessable_entity

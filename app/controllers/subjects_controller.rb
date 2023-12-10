@@ -6,7 +6,7 @@ class SubjectsController < ApplicationController
   def index
     @subjects = Subject.all
 
-    render json: @subjects
+    render json: @subjects.as_json(only: %i[id name mathilda_class_id])
   end
 
   # GET /subjects/1
