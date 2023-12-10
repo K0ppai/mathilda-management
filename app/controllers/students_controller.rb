@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show update destroy]
   before_action :set_mathilda_class, only: %i[create]
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: %i[create update]
 
   # GET /students
   def index
@@ -39,7 +39,7 @@ class StudentsController < ApplicationController
   def update
     @student.mathilda_class = @mathilda_class
     if @student.update(student_params)
-      render json: @student
+      render json: { student: @student, message: 'Student updated successfully' }, status: :ok, location: @student
     else
       render json: @student.errors, status: :unprocessable_entity
     end

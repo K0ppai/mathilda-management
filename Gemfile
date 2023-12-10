@@ -49,3 +49,7 @@ end
 gem 'jwt', '>= 2.5.2'
 
 gem 'active_model_serializers', '~> 0.10.12'
+
+gem 'rufus-scheduler'
+
+gem 'rest-client', '~> 2.1'

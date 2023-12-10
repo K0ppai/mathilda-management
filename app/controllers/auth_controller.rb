@@ -21,7 +21,7 @@ class AuthController < ApplicationController
     params.require(:user).permit(:email, :password)
   end
 
-  def handle_record_not_found(_e)
+  def handle_record_not_found(_error)
     render json: { message: 'Incorrect email or password' }, status: :unauthorized
   end
 end

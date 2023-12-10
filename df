@@ -1,0 +1,37 @@
+=> 
+[[32m#<Student:0x00007f1add888840[0m
+  id: [34m[1m6[0m,
+  name: [31m[1m"[0m[31mpai[0m[31m[1m"[0m,
+  age: [34m[1m12[0m,
+  is_external: [36m[1mtrue[0m,
+  user_id: [34m[1m23[0m,
+  created_at: Sat, 09 Dec 2023 09:08:12.801489000 UTC +00:00,
+  updated_at: Sat, 09 Dec 2023 09:08:12.801489000 UTC +00:00,
+  mathilda_class_id: [34m[1m3[0m[32m>[0m,
+ [32m#<Student:0x00007f1add888660[0m
+  id: [34m[1m9[0m,
+  name: [31m[1m"[0m[31mpai[0m[31m[1m"[0m,
+  age: [34m[1m12[0m,
+  is_external: [36m[1mtrue[0m,
+  user_id: [34m[1m30[0m,
+  created_at: Sat, 09 Dec 2023 11:42:26.795579000 UTC +00:00,
+  updated_at: Sat, 09 Dec 2023 11:42:26.795579000 UTC +00:00,
+  mathilda_class_id: [34m[1m3[0m[32m>[0m,
+ [32m#<Student:0x00007f1add888480[0m
+  id: [34m[1m10[0m,
+  name: [31m[1m"[0m[31mpai[0m[31m[1m"[0m,
+  age: [34m[1m12[0m,
+  is_external: [36m[1mtrue[0m,
+  user_id: [34m[1m31[0m,
+  created_at: Sat, 09 Dec 2023 14:18:51.106055000 UTC +00:00,
+  updated_at: Sat, 09 Dec 2023 14:18:51.106055000 UTC +00:00,
+  mathilda_class_id: [34m[1m3[0m[32m>[0m,
+ [32m#<Student:0x00007f1add8883e0[0m
+  id: [34m[1m11[0m,
+  name: [31m[1m"[0m[31mpai[0m[31m[1m"[0m,
+  age: [34m[1m12[0m,
+  is_external: [36m[1mtrue[0m,
+  user_id: [34m[1m32[0m,
+  created_at: Sat, 09 Dec 2023 14:35:37.515639000 UTC +00:00,
+  updated_at: Sat, 09 Dec 2023 14:35:37.515639000 UTC +00:00,
+  mathilda_class_id: [34m[1m3[0m[32m>[0m]
