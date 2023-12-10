@@ -1,0 +1,456 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  '/classes':
+    get:
+      summary: Get all classes
+      tags:
+        - Classes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                classes:
+                  - id: 3
+                    name: classA
+                    students:
+                      - id: 1
+                        name: Naruto
+                        age: 12
+                        is_external: true
+                      - id: 10
+                        name: Sasuke
+                        age: 12
+                        is_external: true
+                    subjects:
+                      - id: 3
+                        name: Ruby
+                        teachers:
+                          - id: 7
+                            name: Lymda
+                            age: 30
+                      - id: 5
+                        name: PHP
+                        teachers:
+                          - id: 6
+                            name: Itachi
+                            age: 22
+    post:
+      summary: Create a new class
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mathilda_class:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+              required:
+                - name
+      tags:
+        - Classes
+      responses:
+        '201':
+          description: Class created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+              example:
+                id: 3
+                name: classA
+        '400':
+          description: Bad request
+  '/students':
+    get:
+      summary: Get all students
+      tags:
+        - Students
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Naruto
+                  age: 12
+                  is_external: true
+
+                - id: 10
+                  name: Sasuke
+                  age: 12
+                  is_external: true
+
+    post:
+      summary: Create a new student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    role:
+                      type: string
+                      example: student
+                student:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    age:
+                      type: integer
+                    is_external:
+                      type: boolean
+                    mathilda_class_id:
+                      type: integer
+              required:
+                - name
+                - age
+                - is_external
+                - mathilda_class_id
+      tags:
+        - Students
+      responses:
+        '201':
+          description: Student created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  student:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      age:
+                        type: integer
+                      is_external:
+                        type: boolean
+                      mathilda_class_id:
+                        type: integer
+                  token:
+                    type: string
+        '400':
+          description: Bad request
+  '/students/:id':
+    patch:
+      summary: Update a student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                student:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    age:
+                      type: integer
+                    is_external:
+                      type: boolean
+                    mathilda_class_id:
+                      type: integer
+
+              required:
+                - name
+                - age
+                - is_external
+                - mathilda_class_id
+      tags:
+        - Students
+      responses:
+        '201':
+          description: Student updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  age:
+                    type: integer
+                  is_external:
+                    type: boolean
+                  mathilda_class_id:
+                    type: integer
+        '400':
+          description: Bad request
+
+  '/teachers':
+    get:
+      summary: Get all teachers
+      tags:
+        - Teachers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Lymda
+                  age: 12
+                - id: 10
+                  name: Rose
+                  age: 12
+
+    post:
+      summary: Create a new teacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    role:
+                      type: string
+                      example: teacher
+                teacher:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    age:
+                      type: integer
+      tags:
+        - Teachers
+      responses:
+        '201':
+          description: Teacher created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teacher:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      age:
+                        type: integer
+                  token:
+                    type: string
+
+        '400':
+          description: Bad request
+  '/teachers/:id':
+    patch:
+      summary: Update a teacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teacher:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    age:
+                      type: integer
+              required:
+                - name
+                - age
+                - is_external
+                - mathilda_class_id
+      tags:
+        - Teachers
+      responses:
+        '201':
+          description: Teacher updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  age:
+                    type: integer
+        '400':
+          description: Bad request
+  '/subjects':
+    get:
+      summary: Get all subjects
+      tags:
+        - Subjects
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Java
+                  mathilda_class_id: 1
+                - id: 2
+                  name: Ruby
+                  mathilda_class_id: 3
+
+    post:
+      summary: Create a new subject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    mathilda_class_id:
+                      type: integer
+      tags:
+        - Subjects
+      responses:
+        '201':
+          description: Subject created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  mathilda_class_id:
+                    type: integer
+        '400':
+          description: Bad request
+  '/subjects/:id':
+    patch:
+      summary: Update a subject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    mathilda_class_id:
+                      type: integer
+      tags:
+        - Subjects
+      responses:
+        '201':
+          description: Subject updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  mathilda_class_id:
+                    type: integer
+        '400':
+          description: Bad request
+
+  '/login':
+    get:
+      summary: Login
+      tags:
+        - Users
+      description: Login student or teacher.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      security:
+        - Bearer: {}
+      responses:
+        '200':
+          description: Log in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      email:
+                        type: string
+                      role:
+                        type: string
+                  token:
+                    type: string
+        '401':
+          description: Log in failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Incorrect email or password
+
+servers:
+  - url: https://{defaultHost}
+    variables:
+      defaultHost:
+        default: 127.0.0.1:3000
