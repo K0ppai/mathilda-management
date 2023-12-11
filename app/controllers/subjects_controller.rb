@@ -1,12 +1,20 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: %i[show update destroy]
   before_action :set_mathilda_class, only: %i[create]
+  skip_before_action :authorized, only: %i[index]
 
   # GET /subjects
   def index
-    @subjects = Subject.all
+    @subjects = Subject.all.includes(:mathilda_class)
 
-    render json: @subjects
+    render json: @subjects.as_json(
+      include: {
+        mathilda_class: {
+          only: %i[id name]
+        }
+      },
+      only: %i[id name mathilda_class_id]
+    )
   end
 
   # GET /subjects/1

@@ -15,6 +15,30 @@ class AuthController < ApplicationController
     end
   end
 
+  def me
+    if current_user
+      user_json = current_user.as_json(only: %i[id email role])
+
+      if current_user.role == 'student'
+        if current_user.student.present?
+          user_json['student'] = current_user.student.as_json(only: %i[id name age], include: {
+                                                                mathilda_class: { only: %i[id name] }
+                                                              })
+        end
+      elsif current_user.role == 'teacher'
+        if current_user.teacher.present?
+          user_json['teacher'] = current_user.teacher.as_json(only: %i[id name age], include: {
+                                                                mathilda_classes: { only: %i[id name] }
+                                                              })
+        end
+      end
+
+      render json: user_json
+    else
+      render json: { error: 'Please log in' }
+    end
+  end
+
   private
 
   def login_params

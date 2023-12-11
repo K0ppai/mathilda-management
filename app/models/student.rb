@@ -4,7 +4,6 @@ class Student < ApplicationRecord
 
   validates :name, presence: true
   validates :age, presence: true
-  validates :is_external, presence: true
   validates :user_id, presence: true
   validates :mathilda_class_id, presence: true
 

@@ -1,9 +1,10 @@
 class MathildaClassesController < ApplicationController
   before_action :set_mathilda_class, only: %i[show update destroy]
+  skip_before_action :authorized, only: %i[index]
 
   # GET /mathilda_classes
   def index
-    @mathilda_classes = MathildaClass.all.includes(:subjects, :students, subjects: [:teachers])
+    @mathilda_classes = MathildaClass.all.includes(:subjects, :students, :teachers)
 
     response_data = {
       classes: @mathilda_classes.as_json(
@@ -12,12 +13,10 @@ class MathildaClassesController < ApplicationController
             only: %i[id name age is_external]
           },
           subjects: {
-            include: {
-              teachers: {
-                only: %i[id name age]
-              }
-            },
             only: %i[id name]
+          },
+          teachers: {
+            only: %i[id name age]
           }
         },
         only: %i[name id]
