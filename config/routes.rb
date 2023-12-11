@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :subjects, only: %i[index create update]
   resources :mathilda_classes, only: %i[index create]
   post '/login', to: 'auth#login'
+  get '/me', to: 'auth#me'
 end
