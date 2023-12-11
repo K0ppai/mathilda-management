@@ -8,10 +8,10 @@ class AuthController < ApplicationController
       @token = encode_token(user_id: @user.id)
       render json: {
         user: UserSerializer.new(@user),
-        token: @token,
+        token: @token
       }, status: :accepted
     else
-      render json: { message: "Incorrect email or password" }, status: :unauthorized
+      render json: { message: 'Incorrect email or password' }, status: :unauthorized
     end
   end
 
@@ -19,23 +19,23 @@ class AuthController < ApplicationController
     if current_user
       user_json = current_user.as_json(only: %i[id email role])
 
-      if current_user.role == "student"
+      if current_user.role == 'student'
         if current_user.student.present?
-          user_json["student"] = current_user.student.as_json(only: %i[id name age], include: {
-                                                                mathilda_class: { only: %i[id name] },
+          user_json['student'] = current_user.student.as_json(only: %i[id name age], include: {
+                                                                mathilda_class: { only: %i[id name] }
                                                               })
         end
-      elsif current_user.role == "teacher"
+      elsif current_user.role == 'teacher'
         if current_user.teacher.present?
-          user_json["teacher"] = current_user.teacher.as_json(only: %i[id name age], include: {
-                                                                mathilda_classes: { only: %i[id name] },
+          user_json['teacher'] = current_user.teacher.as_json(only: %i[id name age], include: {
+                                                                mathilda_classes: { only: %i[id name] }
                                                               })
         end
       end
 
       render json: user_json
     else
-      render json: { error: "Please log in" }
+      render json: { error: 'Please log in' }
     end
   end
 
@@ -46,6 +46,6 @@ class AuthController < ApplicationController
   end
 
   def handle_record_not_found(_error)
-    render json: { message: "Incorrect email or password" }, status: :unauthorized
+    render json: { message: 'Incorrect email or password' }, status: :unauthorized
   end
 end

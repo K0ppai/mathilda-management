@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: %i[show update destroy]
+  skip_before_action :authorized, only: %i[create]
 
   # GET /teachers
   def index
@@ -22,6 +23,10 @@ class TeachersController < ApplicationController
       teacher.user = user
 
       if teacher.save
+        class_ids = params[:teacher][:class_ids]
+
+        teacher.mathilda_classes << MathildaClass.where(id: class_ids)
+
         render json: { teacher:, token: }, status: :created, location: teacher
       else
         user.destroy
@@ -35,6 +40,8 @@ class TeachersController < ApplicationController
   # PATCH/PUT /teachers/1
   def update
     if @teacher.update(teacher_params)
+      class_ids = params[:teacher][:class_ids]
+      @teacher.mathilda_classes = MathildaClass.find(class_ids)
       render json: @teacher
     else
       render json: @teacher.errors, status: :unprocessable_entity
@@ -55,10 +62,10 @@ class TeachersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:email, :password_digest, :role)
+    params.require(:user).permit(:email, :password, :role)
   end
 
   def teacher_params
-    params.require(:teacher).permit(:name, :age)
+    params.require(:teacher).permit(:name, :age, :class_ids)
   end
 end

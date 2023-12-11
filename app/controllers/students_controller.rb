@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show update destroy]
   before_action :set_mathilda_class, only: %i[create]
-  skip_before_action :authorized, only: %i[create update]
+  skip_before_action :authorized, only: %i[create]
 
   # GET /students
   def index
