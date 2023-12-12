@@ -28,11 +28,11 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Mathilda management <a name="about-project"></a>
+# 📖 Mathilda Management <a name="about-project"></a>
 
-**Mathilda management** is the technical assessment given to me by mathilda®.
+**Mathilda Management** is the technical assessment given to me by mathilda®.
 
-=> [Here is the mathilda management frontend](https://github.com/K0ppai/mathilda-management-frontend)
+=> [Here is the mathilda management frontend repository](https://github.com/K0ppai/mathilda-management-frontend)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -67,16 +67,14 @@
 <!-- GETTING STARTED -->
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-
-- Live demo coming soon.
-
+- <a href="https://mathilda-management.vercel.app/">Live version</a>
 ## ERD Diagram <a name="erd-diagram"></a>
 
 <img src="./assets/ERD.png" alt="logo" width="auto"  height="auto" />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-##  API Documentation <a name="api-doc"></a>
+## API Documentation <a name="api-doc"></a>
 
 - [API Documentation](https://mathilda-management-6d5c387a84e7.herokuapp.com/api-docs/index.html)
 
@@ -138,8 +136,8 @@ To run the project, execute the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Deploy live version**
 - **Implement delete features**
+- **Add form validations**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
