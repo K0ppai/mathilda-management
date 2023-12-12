@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  '/classes':
+  '/mathilda_classes':
     get:
       summary: Get all classes
       tags:
@@ -28,18 +28,17 @@ paths:
                         age: 12
                         is_external: true
                     subjects:
-                      - id: 3
+                      - id: 2
                         name: Ruby
-                        teachers:
-                          - id: 7
-                            name: Lymda
-                            age: 30
-                      - id: 5
-                        name: PHP
-                        teachers:
-                          - id: 6
-                            name: Itachi
-                            age: 22
+                      - id: 3
+                        name: Java
+                    teachers:
+                      - id: 7
+                        name: Lymda
+                        age: 30
+                      - id: 6
+                        name: Rose
+                        age: 22
     post:
       summary: Create a new class
       requestBody:
@@ -138,24 +137,13 @@ paths:
           description: Student created successfully
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  student:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      age:
-                        type: integer
-                      is_external:
-                        type: boolean
-                      mathilda_class_id:
-                        type: integer
-                  token:
-                    type: string
+              example:
+                student:
+                  id: 1
+                  name: Naruto
+                  age: 12
+                  is_external: true
+                token: asdfasdfasdf
         '400':
           description: Bad request
   '/students/:id':
@@ -257,18 +245,12 @@ paths:
           description: Teacher created successfully
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  teacher:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      age:
-                        type: integer
-                  token:
-                    type: string
+              example:
+                teacher:
+                  id: 1
+                  name: Lymda
+                  age: 12
+                token: string
 
         '400':
           description: Bad request
@@ -289,11 +271,12 @@ paths:
                       type: string
                     age:
                       type: integer
+                    class_ids:
+                      type: array
               required:
                 - name
                 - age
-                - is_external
-                - mathilda_class_id
+                - class_ids
       tags:
         - Teachers
       responses:
@@ -301,15 +284,17 @@ paths:
           description: Teacher updated successfully
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  age:
-                    type: integer
+              example:
+                teacher:
+                  - id: 1
+                    name: Lymda
+                    age: 12
+                    mathilda_classes:
+                      - id: 1
+                        name: classA
+                      - id: 2
+                        name: classB
+
         '400':
           description: Bad request
   '/subjects':
@@ -353,15 +338,10 @@ paths:
           description: Subject created successfully
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  mathilda_class_id:
-                    type: integer
+            example:
+              id: 1
+              name: TypeScript
+              mathilda_class_id: 3
         '400':
           description: Bad request
   '/subjects/:id':
@@ -388,15 +368,12 @@ paths:
           description: Subject updated successfully
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  mathilda_class_id:
-                    type: integer
+              content:
+              application/json:
+              example:
+                id: 1
+                name: TypeScript
+                mathilda_class_id: 3
         '400':
           description: Bad request
 
@@ -450,7 +427,7 @@ paths:
                     example: Incorrect email or password
 
 servers:
-  - url: https://{defaultHost}
+  - url: https://127.0.0.1:3001
     variables:
       defaultHost:
-        default: 127.0.0.1:3000
+        default: 127.0.0.1:3001

@@ -39,7 +39,7 @@ class StudentsController < ApplicationController
   def update
     @student.mathilda_class = @mathilda_class
     if @student.update(student_params)
-      render json: { student: @student, message: 'Student updated successfully' }, status: :ok, location: @student
+      render json: { student: @student.as_json(only: %i[name age is_external mathilda_class_id]) }, status: :ok, location: @student
     else
       render json: @student.errors, status: :unprocessable_entity
     end

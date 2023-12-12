@@ -38,7 +38,7 @@ class SubjectsController < ApplicationController
   def update
     @subject.mathilda_class = @mathilda_class
     if @subject.update(subject_params)
-      render json: @subject
+      render json: @subject.as_json(only: %i[id name mathilda_class_id])
     else
       render json: @subject.errors, status: :unprocessable_entity
     end

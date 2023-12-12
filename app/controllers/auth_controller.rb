@@ -11,7 +11,7 @@ class AuthController < ApplicationController
         token: @token
       }, status: :accepted
     else
-      render json: { message: 'Incorrect email or password' }, status: :unauthorized
+      render json: { errorMessage: 'Incorrect email or password' }, status: :unauthorized
     end
   end
 
@@ -35,7 +35,7 @@ class AuthController < ApplicationController
 
       render json: user_json
     else
-      render json: { error: 'Please log in' }
+      render json: { errorMessage: 'Please log in' }
     end
   end
 
@@ -46,6 +46,6 @@ class AuthController < ApplicationController
   end
 
   def handle_record_not_found(_error)
-    render json: { message: 'Incorrect email or password' }, status: :unauthorized
+    render json: { errorMessage: 'Incorrect email or password' }, status: :unauthorized
   end
 end

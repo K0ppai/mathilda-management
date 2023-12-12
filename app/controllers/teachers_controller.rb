@@ -42,7 +42,9 @@ class TeachersController < ApplicationController
     if @teacher.update(teacher_params)
       class_ids = params[:teacher][:class_ids]
       @teacher.mathilda_classes = MathildaClass.find(class_ids)
-      render json: @teacher
+      render json: @teacher.as_json(only: %i[name age], include: {
+                                      mathilda_classes: { only: %i[id name] }
+                                    }), status: :ok, location: @teacher
     else
       render json: @teacher.errors, status: :unprocessable_entity
     end

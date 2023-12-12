@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Yacht Rental</h1>
+  <h1>Mathilda Management</h1>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -12,7 +12,7 @@
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
   - [ ERD Diagram](#erd-diagram)
-  - [Kanban Board](#Kanban-Board)
+  - [ API Documentation ](#api-doc)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -28,11 +28,11 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Yacht Rental <a name="about-project"></a>
+# 📖 Mathilda management <a name="about-project"></a>
 
-**Yacht Rental** is the react client of  a full stack yacht reservation web application built on the rails API.The main function of the app is to allow users to book reservations for renting a yacht.
+**Mathilda management** is the technical assessment given to me by mathilda®.
 
-=> [Here is the Yacht Rental frontend](https://github.com/HtetWaiYan7191/yacht_rental_front_end.git)
+=> [Here is the mathilda management frontend](https://github.com/K0ppai/mathilda-management-frontend)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -56,13 +56,11 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **The user can signup and login to the website to make reservation.**
-- **The user can see links to: Yachts, Reserve, My Reservations, Add Yacht and Delete Yacht**
-- **The user can see a list of yachts**
-- **The user  can select the item and see details of the item**
-- **The user clicks the "Add yacht" link in the navigation panel they can see a form for adding a new yacht.**
-- **When the user clicks the "Delete yacht" link in the navigation panel they can see a list of all items with title and "Delete" button.**
-- **When the user clicks the "My reservations" link in the navigation panel they can see a list of their reservations (with information about item name, date and city).**
+- Teachers and students are identified by their email addresses.
+- Each teacher can teach multiple subjects across multiple classes.
+- A class can consists of 2 types of students, internal and external.
+- External students’ details are retrieved from an external system.
+- The external system will only update external student details at 12:00 am daily.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,21 +68,17 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- <a href="https://beta-yacht-rental.netlify.app/">Yacht Rental Live</a>
-- <a href="https://beta-yacht-rental.onrender.com/api-docs/index.html">API Documentation</a>
+- Live demo coming soon.
 
-##  ERD Diagram <a name="erd-diagram"></a>
+## ERD Diagram <a name="erd-diagram"></a>
 
-<img src="./image.png" alt="logo" width="auto"  height="auto" />
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Kanban Board <a name="Kanban-Board"></a>
-
- ## A Team of 3 Members worked on this project - [See list of authors](#authors)
-   - <a href="https://github.com/K0ppai/yacht-rental-backend/projects/1">Kanban Board Link</a>
+<img src="./assets/ERD.png" alt="logo" width="auto"  height="auto" />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+##  API Documentation <a name="api-doc"></a>
+
+- [API Documentation](https://mathilda-management-6d5c387a84e7.herokuapp.com/api-docs/index.html)
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
@@ -94,10 +88,9 @@ To get a local copy up and running, follow these steps.
 
 In order to run this project you need:
 
-- `React`
-- `Redux`
+- `Ruby`
 - `Rails`
-- `Tailwind CSS and HTML`
+- `PostgreSQL`
 - `Code editor (VSCode)`
 
 ### Setup
@@ -105,7 +98,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```sh
-  git clone https://github.com/K0ppai/yacht-rental-backend.git
+  git clone https://github.com/K0ppai/mathilda-management
 ```
 
 ### Install
@@ -113,15 +106,13 @@ Clone this repository to your desired folder:
 Install this project run these commands in order:
 
 ```sh
-  cd my-project
+  cd mathilda-management
   bundle install
   rails db:create
   rails db:migrate
-  rails db:seed
 ```
 
 ### Usage
-
 
 To run the project, execute the following command:
 
@@ -129,74 +120,11 @@ To run the project, execute the following command:
   rails server
 ```
 
-To run tests for controllers(request) and for API Documentation, run the following command:
-
-Install the gem -
- Add the `gem 'rswag'` and `gem 'rswag-ui'` in your gem file and run `bundle install`
-
-Run
-
-```sh
-  rails generate rswag:install
-```
-
-### If you're trying to run the app on local, kindly set up the following,
-
-- You need to delete config/credentials.yml.enc first.
-- Generate a secret by typing this cmd in the terminal:
-
-```sh
- bundle exec rake secret
-``` 
-
-```sh
- EDITOR='code --wait' rails credentials:edit 
-``` 
- 
-- and once the encrypted .yml is opened
-- Copy this `devise_jwt_secret_key: (copy and paste the generated secret here)`
-- After copying the secret key in the encrypted .yml file, close it to save. For further information, kindly visit this [link](https://sdrmike.medium.com/rails-7-api-only-app-with-devise-and-jwt-for-authentication-1397211fb97c).
-
-### Update CORS
-
-- config/initializers/cors.rb
-
-```sh
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins 'https://localhost:5173'
-    resource '*',
-             headers: :any,
-             methods: %i[get post put patch delete options head],
-             expose: [:Authorization]
-  end
-
-  allow do
-    origins '*' # Your frontend app deploy link
-    resource '*',
-             headers: :any,
-             methods: %i[get post put patch delete options head],
-             expose: [:Authorization]
-  end
-end
-
-```
-- If you want to run in local dev kindly update origins to your frontend app url.
-
-### Deployment
-
-You can deploy this project using your own deployment solution
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
 
 ## 👥 Authors <a name="authors"></a>
-
-👤 **Htet Wai Yan**
-
-- GitHub: [@HtetWaiYan7191](https://github.com/HtetWaiYan7191)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/htet-wai-yan-903354263/)
 
 👤 **Paing Soe Thu**
 
@@ -204,20 +132,14 @@ You can deploy this project using your own deployment solution
 - Twitter: [@_koppai_](https://twitter.com/_koppai_)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/paingsoe-thu)
 
-👤 **Than Myo Htet**
-
-- GitHub: [@YoutLone](https://github.com/YoutLone)
-- LinkedIn: [than-myo-htet-618b2524b](https://linkedin.com/in/than-myo-htet-618b2524b)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Add an option to buy new yacht**
-- **Implement Edit button in the Delete yacht section**
-- **Redirect the email confirmation link to login page**
+- **Deploy live version**
+- **Implement delete features**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -227,7 +149,7 @@ You can deploy this project using your own deployment solution
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/K0ppai/yacht-rental-backend/issues).
+Feel free to check the [issues page](https://github.com/K0ppai/mathilda-management/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -235,7 +157,7 @@ Feel free to check the [issues page](https://github.com/K0ppai/yacht-rental-back
 
 ## ⭐️ Show your support <a name="support"></a>
 
-If you like this project consider adding a ⭐️
+If you like this project, don't forget to give it a ⭐️. 😉
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -243,9 +165,7 @@ If you like this project consider adding a ⭐️
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-Original design idea by [Murat Korkmaz on Behance](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign).
-
-We would like to thank [Microverse](https://bit.ly/MicroverseTN).
+I would like to thank [mathilda®](https://mathilda.io/content/home) for this amazing opportunity.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -256,4 +176,3 @@ We would like to thank [Microverse](https://bit.ly/MicroverseTN).
 This project is [MIT](./LICENSE) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
