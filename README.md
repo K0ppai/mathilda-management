@@ -56,7 +56,7 @@
 
 ### Key Features <a name="key-features"></a>
 
-- Teachers and students are identified by their email addresses.
+- Teachers and students are identified by their email addresses and save in cookies using jwt after login.
 - Each teacher can teach multiple subjects across multiple classes.
 - A class can consists of 2 types of students, internal and external.
 - External students’ details are retrieved from an external system.
