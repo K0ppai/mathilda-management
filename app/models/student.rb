@@ -8,6 +8,7 @@ class Student < ApplicationRecord
   validates :mathilda_class_id, presence: true
 
   def update_external_students
+    # change with actual external system endpoint
     response = RestClient.get 'http://localhost:3001/students'
     students = JSON.parse response
 
