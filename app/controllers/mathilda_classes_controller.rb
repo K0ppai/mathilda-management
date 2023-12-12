@@ -10,17 +10,17 @@ class MathildaClassesController < ApplicationController
       classes: @mathilda_classes.as_json(
         include: {
           students: {
-            only: %i[id name age is_external]
+            only: %i[id name age is_external],
           },
           subjects: {
-            only: %i[id name]
+            only: %i[id name],
           },
           teachers: {
-            only: %i[id name age]
-          }
+            only: %i[id name age],
+          },
         },
-        only: %i[name id]
-      )
+        only: %i[name id],
+      ),
     }
 
     render json: response_data
